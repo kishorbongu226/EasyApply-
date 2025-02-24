@@ -1,0 +1,122 @@
+/* General Page Styling */
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to right, #f093fb, #f5576c);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Header Styling */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 15px;
+  color: white;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Form Container */
+.form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  text-align: left;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+}
+
+/* Headings & Text */
+h2 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+p {
+  color: #555;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Input Fields */
+label {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #e84118;
+}
+
+/* Concession Result */
+#concessionResult {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #27ae60;
+  text-align: center;
+}

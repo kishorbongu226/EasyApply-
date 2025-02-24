@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>University Filters</title>
+    <link rel="stylesheet" href="filtersstyling.css" />
+    <script>
+      function filterOptions(inputId, listId) {
+        let input = document.getElementById(inputId);
+        let filter = input.value.toLowerCase();
+        let items = document.querySelectorAll(`#${listId} label`);
+
+        items.forEach((item) => {
+          let text = item.textContent || item.innerText;
+          item.style.display = text.toLowerCase().includes(filter)
+            ? "block"
+            : "none";
+        });
+      }
+    </script>
+    <script src="filterscript.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">EasyApply</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+    <br />
+    <form>
+      <!-- First Column -->
+      <div class="column">
+        <div id="streamFilter" class="filter-group">
+          <h3>Stream</h3>
+          <input
+            type="text"
+            id="streamSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('streamSearch', 'streamList')"
+          />
+        </div>
+        <div id="streamList">
+          <label><input type="radio" name="stream" /> Commerce</label>
+          <label><input type="radio" name="stream" /> Engineering</label>
+          <label><input type="radio" name="stream" /> Design</label>
+          <label><input type="radio" name="stream" /> Hotel Management</label>
+          <label><input type="radio" name="stream" /> Nursing</label>
+        </div>
+
+        <div id="degreeFilter" class="filter-group">
+          <h3>Degree</h3>
+          <input
+            type="text"
+            id="degreeSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('degreeSearch', 'degreeList')"
+          />
+        </div>
+        <div id="degreeList">
+          <label><input type="checkbox" /> B.Sc</label>
+          <label><input type="checkbox" /> BE</label>
+          <label><input type="checkbox" /> B.Tech</label>
+          <label><input type="checkbox" /> B.A.</label>
+          <label><input type="checkbox" /> B.Com</label>
+        </div>
+
+        <div id="stateFilter" class="filter-group">
+          <h3>State</h3>
+          <input
+            type="text"
+            id="stateSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('stateSearch', 'stateList')"
+          />
+        </div>
+        <div id="stateList">
+          <label><input type="checkbox" /> Andhra Pradesh</label>
+          <label><input type="checkbox" /> Tamil Nadu</label>
+          <label><input type="checkbox" /> Telangana</label>
+          <label><input type="checkbox" /> Karnataka</label>
+          <label><input type="checkbox" /> Kerala</label>
+        </div>
+      </div>
+
+      <!-- Second Column -->
+      <div class="column">
+        <div id="cityFilter" class="filter-group">
+          <h3>City</h3>
+          <input
+            type="text"
+            id="citySearch"
+            placeholder="Search"
+            onkeyup="filterOptions('citySearch', 'cityList')"
+          />
+        </div>
+        <div id="cityList">
+          <label><input type="checkbox" /> Chennai</label>
+          <label><input type="checkbox" /> Vijayawada</label>
+          <label><input type="checkbox" /> Coimbatore</label>
+          <label><input type="checkbox" /> Hyderabad</label>
+          <label><input type="checkbox" /> Bangalore</label>
+        </div>
+
+        <div id="studyModeFilter" class="filter-group">
+          <h3>Study Mode</h3>
+          <input
+            type="text"
+            id="studyModeSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('studyModeSearch', 'studyModeList')"
+          />
+        </div>
+        <div id="studyModeList">
+          <label><input type="checkbox" /> Distance learning</label>
+          <label><input type="checkbox" /> Online</label>
+          <label><input type="checkbox" /> Part time</label>
+          <label><input type="checkbox" /> Regular</label>
+        </div>
+
+        <div id="specializationFilter" class="filter-group">
+          <h3>Specialization</h3>
+          <input
+            type="text"
+            id="specializationSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('specializationSearch', 'specializationList')"
+          />
+        </div>
+        <div id="specializationList">
+          <label><input type="checkbox" /> Computer Science</label>
+          <label><input type="checkbox" /> Mechanical Engineering</label>
+          <label><input type="checkbox" /> Civil Engineering</label>
+          <label
+            ><input type="checkbox" /> Electrical and Electronics
+            Engineering</label
+          >
+          <label><input type="checkbox" /> Education and Teaching</label>
+        </div>
+      </div>
+
+      <!-- Third Column -->
+      <div class="column">
+        <div id="instituteTypeFilter" class="filter-group">
+          <h3>Institute Type</h3>
+          <input
+            type="text"
+            id="instituteTypeSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('instituteTypeSearch', 'instituteTypeList')"
+          />
+        </div>
+        <div id="instituteTypeList">
+          <label><input type="checkbox" /> Government</label>
+          <label><input type="checkbox" /> Private</label>
+        </div>
+
+        <div id="examFilter" class="filter-group">
+          <h3>Exam</h3>
+          <input
+            type="text"
+            id="examSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('examSearch', 'examList')"
+          />
+        </div>
+        <div id="examList">
+          <label><input type="checkbox" /> JEE Mains</label>
+          <label><input type="checkbox" /> EAMCET</label>
+          <label><input type="checkbox" /> IPE Board</label>
+          <label><input type="checkbox" /> CAT</label>
+          <label><input type="checkbox" /> CMAT</label>
+        </div>
+
+        <div id="facilitiesFilter" class="filter-group">
+          <h3>Facilities</h3>
+          <input
+            type="text"
+            id="facilitiesSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('facilitiesSearch', 'facilitiesList')"
+          />
+        </div>
+        <div id="facilitiesList">
+          <label><input type="checkbox" /> Gym</label>
+          <label><input type="checkbox" /> Hospital</label>
+          <label><input type="checkbox" /> Playground</label>
+          <label><input type="checkbox" /> Hostel</label>
+          <label><input type="checkbox" /> International Centre</label>
+        </div>
+
+        <div id="hostelFilter" class="filter-group">
+          <h3>Hostel</h3>
+          <input
+            type="text"
+            id="hostelSearch"
+            placeholder="Search"
+            onkeyup="filterOptions('hostelSearch', 'hostelList')"
+          />
+        </div>
+        <div id="hostelList">
+          <label><input type="checkbox" /> Boys Hostel</label>
+          <label><input type="checkbox" /> Girls Hostel</label>
+        </div>
+      </div>
+    </form>
+    <br />
+
+    <div class="class-button">
+      <a href="universities.html" class="btn" onclick="saveFilters()">Save</a>
+    </div>
+    <script>
+      function saveFilters() {
+        // Retrieve selected values from each filter section
+        const selectedFilters = {
+          stream: document
+            .querySelector("#streamList input:checked")
+            ?.parentElement.textContent.trim(),
+          degree: document
+            .querySelector("#degreeList input:checked")
+            ?.parentElement.textContent.trim(),
+          state: document
+            .querySelector("#stateList input:checked")
+            ?.parentElement.textContent.trim(),
+          city: document
+            .querySelector("#cityList input:checked")
+            ?.parentElement.textContent.trim(),
+          studyMode: document
+            .querySelector("#studyModeList input:checked")
+            ?.parentElement.textContent.trim(),
+          specialization: document
+            .querySelector("#specializationList input:checked")
+            ?.parentElement.textContent.trim(),
+          instituteType: document
+            .querySelector("#instituteTypeList input:checked")
+            ?.parentElement.textContent.trim(),
+          exam: document
+            .querySelector("#examList input:checked")
+            ?.parentElement.textContent.trim(),
+          facilities: Array.from(
+            document.querySelectorAll("#facilitiesList input:checked")
+          ).map((el) => el.parentElement.textContent.trim()),
+          hostel: document
+            .querySelector("#hostelList input:checked")
+            ?.parentElement.textContent.trim(),
+        };
+
+        // Store selected filters in localStorage
+        localStorage.setItem(
+          "selectedFilters",
+          JSON.stringify(selectedFilters)
+        );
+      }
+    </script>
+  </body>
+</html>

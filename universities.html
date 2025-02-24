@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filtered University List</title>
+    <link rel="stylesheet" href="universitylist.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // List of universities with their attributes
+        const universityList = [
+          {
+            name: "Sathyabama University",
+            stream: "Engineering",
+            degree: "B.Tech",
+            state: "Tamil Nadu",
+            city: "Chennai",
+            studyMode: "Regular",
+            specialization: "Computer Science",
+            instituteType: "Government",
+            exam: "JEE Main",
+            facilities: ["Hostel", "Playground"],
+            hostel: "Boys & Girls",
+            concessionBasedOn: ["JEE Main"],
+          },
+          {
+            name: "KL university",
+            stream: "Commerce",
+            degree: "BBA",
+            state: "Karnataka",
+            city: "Bangalore",
+            studyMode: "Regular",
+            specialization: "Finance",
+            instituteType: "Government",
+            exam: "CAT",
+            facilities: ["Gym", "Library"],
+            hostel: "Boys & Girls",
+            concessionBasedOn: ["Board Exam"],
+          },
+          {
+            name: "Gitam University",
+            stream: "Engineering",
+            degree: "B.Tech",
+            state: "Telangana",
+            city: "Hyderabad",
+            studyMode: "Regular",
+            specialization: "Electronics",
+            instituteType: "Private",
+            exam: "JEE Main",
+            facilities: ["Playground", "Gym"],
+            hostel: "Boys & Girls",
+            concessionBasedOn: ["JEE Main"],
+          },
+          {
+            name: "Osmania University",
+            stream: "Engineering",
+            degree: "BE",
+            state: "Telangana",
+            city: "Hyderabad",
+            studyMode: "Part time",
+            specialization: "Mechanical Engineering",
+            instituteType: "Government",
+            exam: "EAMCET",
+            facilities: ["Library"],
+            hostel: "Boys",
+            concessionBasedOn: ["EAMCET"],
+          },
+          {
+            name: "VIT Vellore",
+            stream: "Engineering",
+            degree: "B.Tech",
+            state: "Tamil Nadu",
+            city: "Vellore",
+            studyMode: "Regular",
+            specialization: "Information Technology",
+            instituteType: "Private",
+            exam: "JEE Main",
+            facilities: ["Hostel", "Gym"],
+            hostel: "Boys & Girls",
+            concessionBasedOn: ["Board Exam", "JEE Main"],
+          },
+        ];
+
+        // Retrieve selected filters from localStorage
+        const selectedFilters =
+          JSON.parse(localStorage.getItem("selectedFilters")) || {};
+
+        function filterUniversities() {
+          return universityList.filter((university) => {
+            return (
+              (!selectedFilters.stream ||
+                university.stream === selectedFilters.stream) &&
+              (!selectedFilters.degree ||
+                university.degree === selectedFilters.degree) &&
+              (!selectedFilters.state ||
+                university.state === selectedFilters.state) &&
+              (!selectedFilters.city ||
+                university.city === selectedFilters.city) &&
+              (!selectedFilters.studyMode ||
+                university.studyMode === selectedFilters.studyMode) &&
+              (!selectedFilters.specialization ||
+                university.specialization === selectedFilters.specialization) &&
+              (!selectedFilters.instituteType ||
+                university.instituteType === selectedFilters.instituteType) &&
+              (!selectedFilters.exam ||
+                university.exam === selectedFilters.exam) &&
+              (!selectedFilters.facilities ||
+                selectedFilters.facilities.every((facility) =>
+                  university.facilities.includes(facility)
+                )) &&
+              (!selectedFilters.hostel ||
+                university.hostel.includes(selectedFilters.hostel))
+            );
+          });
+        }
+
+        function displayUniversities() {
+          const universityContainer = document.getElementById("universities");
+          universityContainer.innerHTML = ""; // Clear previous data
+
+          const filteredUniversities = filterUniversities();
+          if (filteredUniversities.length === 0) {
+            universityContainer.innerHTML =
+              "<p>No universities found based on your selected filters.</p>";
+            return;
+          }
+
+          filteredUniversities.forEach((university) => {
+            const div = document.createElement("div");
+            div.className = "university-card";
+            div.innerHTML = `
+                        <h3>${university.name}</h3>
+                        <p><strong>State:</strong> ${university.state}</p>
+                        <p><strong>City:</strong> ${university.city}</p>
+                        <p><strong>Specialization:</strong> ${
+                          university.specialization
+                        }</p>
+                        <p><strong>Institute Type:</strong> ${
+                          university.instituteType
+                        }</p>
+                        <p><strong>Entrance Exam:</strong> ${
+                          university.exam
+                        }</p>
+                        <p><strong>Facilities:</strong> ${university.facilities.join(
+                          ", "
+                        )}</p>
+                        <p><strong>Hostel:</strong> ${university.hostel}</p>
+                        <p><strong>Concession Based On:</strong> ${university.concessionBasedOn.join(
+                          " & "
+                        )}</p>
+                    `;
+            div.onclick = function () {
+              window.location.href = `concession.html?university=${encodeURIComponent(
+                university.name
+              )}&concessionType=${encodeURIComponent(
+                university.concessionBasedOn.join(",")
+              )}`;
+            };
+            universityContainer.appendChild(div);
+          });
+        }
+
+        displayUniversities();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">EasyApply</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+    <h2>Filtered University List</h2>
+    <div id="universities" class="grid-container"></div>
+  </body>
+</html>

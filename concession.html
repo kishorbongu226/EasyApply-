@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concession Fee Calculator</title>
+    <link rel="stylesheet" href="concestyling.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const universityName = urlParams.get("university");
+        const concessionTypes =
+          urlParams.get("concessionType")?.split(",") || [];
+
+        if (universityName) {
+          document.getElementById("universityName").textContent =
+            universityName;
+        }
+
+        // Hide all input fields initially
+        document.getElementById("eamcetSection").style.display = "none";
+        document.getElementById("boardSection").style.display = "none";
+        document.getElementById("jeeSection").style.display = "none";
+
+        // Show only the relevant input fields
+        concessionTypes.forEach((type) => {
+          if (type.trim() === "EAMCET") {
+            document.getElementById("eamcetSection").style.display = "block";
+          }
+          if (type.trim() === "Board Exam") {
+            document.getElementById("boardSection").style.display = "block";
+          }
+          if (type.trim() === "JEE Main") {
+            document.getElementById("jeeSection").style.display = "block";
+          }
+        });
+
+        document
+          .getElementById("calculateBtn")
+          .addEventListener("click", function () {
+            let eligibleScores = [];
+
+            if (
+              document.getElementById("eamcetSection").style.display === "block"
+            ) {
+              const eamcetMarks =
+                parseFloat(document.getElementById("eamcetMarks").value) || 0;
+              eligibleScores.push(eamcetMarks);
+            }
+
+            if (
+              document.getElementById("boardSection").style.display === "block"
+            ) {
+              const boardMarks =
+                parseFloat(document.getElementById("boardMarks").value) || 0;
+              eligibleScores.push(boardMarks);
+            }
+
+            if (
+              document.getElementById("jeeSection").style.display === "block"
+            ) {
+              const jeePercentile =
+                parseFloat(document.getElementById("jeePercentile").value) || 0;
+              eligibleScores.push(jeePercentile);
+            }
+
+            if (eligibleScores.length === 0) {
+              document.getElementById("concessionResult").innerHTML =
+                "No valid marks entered.";
+              return;
+            }
+
+            // Get the best score among the eligible exams
+            const bestScore = Math.max(...eligibleScores);
+            let concession = 0;
+
+            if (bestScore >= 90) {
+              concession = 50; // 50% concession
+            } else if (bestScore >= 80) {
+              concession = 30; // 30% concession
+            } else if (bestScore >= 70) {
+              concession = 10; // 10% concession
+            } else {
+              concession = 0; // No concession
+            }
+
+            document.getElementById(
+              "concessionResult"
+            ).innerHTML = `Based on your best eligible score (<strong>${bestScore}%</strong>), you get a <strong>${concession}%</strong> concession at ${universityName}.`;
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">EasyApply</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="unilist.html">Back to Universities</a></li>
+      </ul>
+    </div>
+
+    <div class="form-container">
+      <h2>Check Concession Fee</h2>
+      <p>
+        Enter your marks to check the concession percentage for
+        <strong id="universityName"></strong>.
+      </p>
+
+      <div id="eamcetSection">
+        <label for="eamcetMarks">EAMCET Marks (%):</label>
+        <input type="number" id="eamcetMarks" min="0" max="100" />
+      </div>
+
+      <div id="boardSection">
+        <label for="boardMarks">Board Exam Marks (%):</label>
+        <input type="number" id="boardMarks" min="0" max="100" />
+      </div>
+
+      <div id="jeeSection">
+        <label for="jeePercentile">JEE Main Percentile:</label>
+        <input type="number" id="jeePercentile" min="0" max="100" />
+      </div>
+
+      <button id="calculateBtn">Check Concession</button>
+
+      <div id="concessionResult"></div>
+    </div>
+  </body>
+</html>
